@@ -22,4 +22,9 @@
   <ItemGroup>
     <Content Include="dates.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="notfound.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

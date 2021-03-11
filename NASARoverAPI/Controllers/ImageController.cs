@@ -36,5 +36,22 @@ namespace NASARoverAPI.Controllers
             ApiProviderResult result = provider.DownloadFiles("dates.txt");
             return result;
         }
+
+        [HttpGet("GetMetadata")]
+        public ApiProviderResult GetMetadata()
+        {
+            NasaApiProvider provider = new NasaApiProvider(nasaConfiguration);
+            var result = provider.GetMetadata();
+            return result;
+        }
+
+        [HttpGet("GetImage")]
+        public ApiProviderResult GetImage()
+        {
+            //NasaApiProvider provider = new NasaApiProvider(nasaConfiguration);
+            //var result = provider.GetImage();
+            //return result;
+            return null;
+        }
     }
 }

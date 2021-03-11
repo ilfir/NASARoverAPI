@@ -16,6 +16,7 @@ namespace NASARoverAPI.Types
             public string earth_date { get; set; }
             public Rover rover { get; set; }
             public bool isDownloaded { get; set; }
+            public bool isExists { get; set; }
         }
 
         public class Camera
