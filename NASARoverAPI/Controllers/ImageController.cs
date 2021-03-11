@@ -37,7 +37,6 @@ namespace NASARoverAPI.Controllers
                 resp.Add(date.ToShortDateString());
             }
 
-//            resp.Add(dateFileContents);
 
             return resp;
         }
