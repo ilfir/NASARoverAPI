@@ -53,7 +53,16 @@ namespace NASARoverAPI
             t.Wait();
 
             RestResponse webResponse = t.Result;
-            RoverPhotos roverPhotos = JsonConvert.DeserializeObject<RoverPhotos>(webResponse.data);            
+            RoverPhotos roverPhotos = JsonConvert.DeserializeObject<RoverPhotos>(webResponse.data);
+
+            //Kick off writing to disk
+            WriteFileToDisk(roverPhotos);
+
+        }
+
+        private void WriteFileToDisk(RoverPhotos roverPhotos)
+        {
+            //Write files to disk here    
         }
     }
 }
