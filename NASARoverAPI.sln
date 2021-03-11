@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASARoverAPI", "NASARoverAPI\NASARoverAPI.csproj", "{B3B032BC-0B46-48AA-8722-53A2331643EC}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AA0B8D86-BCBE-4377-881B-71815520FA57}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASARoverAPI.Tests", "NASARoverAPI.Tests\NASARoverAPI.Tests.csproj", "{FEBC9AC7-A2DA-45DB-87E5-66670B24D326}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{38522B9A-8E0F-46B1-88F8-7B45D94DAFF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +17,13 @@ Global
 		{B3B032BC-0B46-48AA-8722-53A2331643EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3B032BC-0B46-48AA-8722-53A2331643EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3B032BC-0B46-48AA-8722-53A2331643EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA0B8D86-BCBE-4377-881B-71815520FA57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA0B8D86-BCBE-4377-881B-71815520FA57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA0B8D86-BCBE-4377-881B-71815520FA57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA0B8D86-BCBE-4377-881B-71815520FA57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FEBC9AC7-A2DA-45DB-87E5-66670B24D326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FEBC9AC7-A2DA-45DB-87E5-66670B24D326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEBC9AC7-A2DA-45DB-87E5-66670B24D326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEBC9AC7-A2DA-45DB-87E5-66670B24D326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38522B9A-8E0F-46B1-88F8-7B45D94DAFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38522B9A-8E0F-46B1-88F8-7B45D94DAFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38522B9A-8E0F-46B1-88F8-7B45D94DAFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38522B9A-8E0F-46B1-88F8-7B45D94DAFF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
