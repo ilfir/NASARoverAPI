@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  nasaroverapi:
+    image: ${DOCKER_REGISTRY-}nasaroverapi
+    build:
+      context: .
+      dockerfile: NASARoverAPI/Dockerfile

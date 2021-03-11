@@ -1,0 +1,153 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI.Tests/NASARoverAPI.Tests.csproj": {}
+  },
+  "projects": {
+    "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI.Tests/NASARoverAPI.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI.Tests/NASARoverAPI.Tests.csproj",
+        "projectName": "NASARoverAPI.Tests",
+        "projectPath": "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI.Tests/NASARoverAPI.Tests.csproj",
+        "packagesPath": "/Users/ilfir2/.nuget/packages/",
+        "outputPath": "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI.Tests/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/ilfir2/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI/NASARoverAPI.csproj": {
+                "projectPath": "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI/NASARoverAPI.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI/NASARoverAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI/NASARoverAPI.csproj",
+        "projectName": "NASARoverAPI",
+        "projectPath": "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI/NASARoverAPI.csproj",
+        "packagesPath": "/Users/ilfir2/.nuget/packages/",
+        "outputPath": "/Users/ilfir2/Projects/NASARoverAPI/NASARoverAPI/NASARoverAPI/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/ilfir2/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
