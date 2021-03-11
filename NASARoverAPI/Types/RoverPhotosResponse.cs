@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 namespace NASARoverAPI.Types
 {
-    public class RoverPhotos
+    public class RoverPhotosResponse
     {
-        public List<Photo> photos;
+        public List<Photo> photos { get; set; }
 
         public class Photo
         {
             public string id { get; set; }
             public string sol { get; set; }
-            public Photo camera { get; set; }
+         //   public Camera camera { get; set; }
             public string img_src { get; set; }
             public string earth_date { get; set; }
             public Rover rover { get; set; }
+            public bool isDownloaded { get; set; }
         }
 
         public class Camera

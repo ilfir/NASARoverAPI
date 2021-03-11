@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NASARoverAPI.Types;
+using System.Text.Json;
 
 namespace NASARoverAPI.Controllers
 {
@@ -22,38 +23,18 @@ namespace NASARoverAPI.Controllers
         }
                 
         [HttpGet("")]
-        public IEnumerable<string> Index()
+        public string Index()
         {
-            var dateFileContents = DateHelper.GetDatesFromFileAsString("dates.txt");
-            var dates = DateHelper.GetFormattedDatesFromString(dateFileContents);
-
-            NasaApiProvider provider = new NasaApiProvider(nasaConfiguration);
-            
-
-            var resp = new List<string>();
-
-            foreach (var date in dates)
-            {
-                resp.Add(date.ToShortDateString());
-            }
-
-
-            return resp;
+            return "Nothing happens here";         
         }
 
         [HttpGet("DownloadFiles")]
-        public ActionResult DownloadFiles()
+        public ApiProviderResult DownloadFiles()
         {
 
             NasaApiProvider provider = new NasaApiProvider(nasaConfiguration);
-
-            provider.StartDownloadProcess();
-            // DownloadFiles()
-
-
-            var path = @"c:\FileDownload.csv";
-            //return File((path, "text/plain", sourceLocaion);
-            return null;
+            ApiProviderResult result = provider.DownloadFiles("dates.txt");
+            return result;
         }
     }
 }

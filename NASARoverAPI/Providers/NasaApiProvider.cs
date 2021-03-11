@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace NASARoverAPI
 {
-    public class NasaApiProvider : IApiProvider
+    public class NasaApiProvider// : IApiProvider
     {
         private string apiKey;
         private string apiUrl;
@@ -26,41 +26,90 @@ namespace NASARoverAPI
             this.rovers = config.Value.rovers;
         }
 
-        public void StartDownloadProcess()
+        public ApiProviderResult DownloadFiles(string inputFile)
         {
-            var dateFileContents = DateHelper.GetDatesFromFileAsString("dates.txt");
+            ApiProviderResult result;
+
+            // Read in the dates from input file
+            var dateFileContents = DateHelper.GetDatesFromFileAsString(inputFile);
             var dates = DateHelper.GetFormattedDatesFromString(dateFileContents);
-            foreach (var date in dates)
+
+            if (dates.Count > 0)
             {
-                // TODO: need to figure out what to do with invalid dates.
-                if(date.Ticks > 0)
-                    DownloadResource(date.ToString("yyyy-MM-dd"));
+                result = new ApiProviderResult();
+                result.data = new List<ApiProviderResult.ImageData>();
+                List<Task> tasks = new List<Task>();
+                // Process all the dates from input file and keep track of processing for each date
+                foreach (var date in dates)
+                {
+                    // TODO: need to figure out what to do with invalid dates.
+                    if (date.Ticks > 0)
+                       tasks.Add(Task.Run(() => DownloadFilesForDate(date.ToString("yyyy-MM-dd"))));
+                }
+                Task.WaitAll(tasks.ToArray());
+                                
+                foreach (Task<Dictionary<string, List<RoverPhotosResponse>>> task in tasks)
+                {
+                    var taskResult = task.Result;
+                    var imageData = new ApiProviderResult.ImageData();
+                    foreach (var roverImageData in taskResult)
+                    {
+                        var date = roverImageData.Key;
+                        foreach (var roverImage in roverImageData.Value)
+                        {
+                            roverImage.photos.ForEach(delegate (RoverPhotosResponse.Photo photo)
+                            {
+                                var imageData = new ApiProviderResult.ImageData()
+                                {
+                                    image = photo.img_src,
+                                    roverName = photo.rover.name,
+                                    date = date,
+                                    isDownloaded = photo.isDownloaded                                
+                                };
+                                result.data.Add(imageData);
+                            });
+                        }
+                    }                    
+                }
+                result.success = true;
             }
+            else
+            {
+                result = new ApiProviderResult(){ message = "Unable to read dates for input." };
+            }
+
+            return result;
         }
 
-        public void DownloadResource(string formattedDate)
+        public Dictionary<string, List<RoverPhotosResponse>> DownloadFilesForDate(string formattedDate)
         {
+            
+            List<RoverPhotosResponse> roverData = new List<RoverPhotosResponse>();
             foreach (var rover in rovers)
             {
-                DownloadRoverDataForDate(rover, formattedDate);
+                roverData.Add(DownloadRoverDataForDate(rover, formattedDate));
             }
+            Dictionary<string, List<RoverPhotosResponse>> dateData = new Dictionary<string, List<RoverPhotosResponse>>();
+            dateData.Add(formattedDate, roverData);
+            return dateData;
         }
 
-        private void DownloadRoverDataForDate(string rover, string formattedDate)
+        private RoverPhotosResponse DownloadRoverDataForDate(string rover, string formattedDate)
         {
             var url = apiUrl + $"/mars-photos/api/v1/rovers/{rover}/photos?earth_date={formattedDate}&api_key={apiKey}";            
             var t = Task.Run(() => RestHelper.ProcessGetRequestAsync(url));
             t.Wait();
 
             RestResponse webResponse = t.Result;
-            RoverPhotos roverPhotos = JsonConvert.DeserializeObject<RoverPhotos>(webResponse.data);
+            RoverPhotosResponse roverPhotos = JsonConvert.DeserializeObject<RoverPhotosResponse>(webResponse.data);
 
-            //Kick off writing to disk
+            // Kick off writing to disk
             WriteFileToDisk(roverPhotos);
 
+            return roverPhotos;
         }
 
-        private void WriteFileToDisk(RoverPhotos roverPhotos)
+        private void WriteFileToDisk(RoverPhotosResponse roverPhotos)
         {
             //Write files to disk here    
         }
