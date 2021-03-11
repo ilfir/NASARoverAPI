@@ -8,6 +8,7 @@ using NASARoverAPI.Types;
 using NASARoverAPI.Helpers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace NASARoverAPI
 {
@@ -72,6 +73,7 @@ namespace NASARoverAPI
                     }                    
                 }
                 result.success = true;
+                result.message = $"Total number of images found: {result.data.Count}. Number of images downloaded: {result.data.Where(w=>w.isDownloaded).Count()}.";
             }
             else
             {
@@ -104,14 +106,26 @@ namespace NASARoverAPI
             RoverPhotosResponse roverPhotos = JsonConvert.DeserializeObject<RoverPhotosResponse>(webResponse.data);
 
             // Kick off writing to disk
-            WriteFileToDisk(roverPhotos);
+            WriteFilesToDisk(roverPhotos);
 
             return roverPhotos;
         }
 
-        private void WriteFileToDisk(RoverPhotosResponse roverPhotos)
+        private void WriteFilesToDisk(RoverPhotosResponse roverPhotos)
         {
-            //Write files to disk here    
+            using (var client = new WebClient())
+            {
+                foreach (var roverPhoto in roverPhotos.photos)
+                {
+                    var roverFileFolder = localFolder + $"{roverPhoto.earth_date}/{roverPhoto.rover.name}/";
+                    if (!System.IO.Directory.Exists(roverFileFolder))
+                        System.IO.Directory.CreateDirectory(roverFileFolder);
+
+                    var downloadUrl = roverPhoto.img_src + "?api_key=" + apiKey;
+                    var localFileName = System.IO.Path.GetFileName(roverPhoto.img_src);
+                    client.DownloadFile(downloadUrl, roverFileFolder + localFileName);
+                }
+            }
         }
     }
 }
