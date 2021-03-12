@@ -20,7 +20,8 @@ Functionality in API:
 Application settings in appsettings.json: 
 - ApiKey - used in all API calls to NASA endpoints. 
 - ApiUrl - base url for all calls except when downloading images. 
-- localFolder - base folder for downloading
+- localFolder - base folder for downloading.
+- rovers - list of rover names to query.
 
 Notes:
 - When downloading files, metadata for the files is also saved on local volume with limited information for displaying list of images in UI.
