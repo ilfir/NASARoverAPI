@@ -2,13 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to NASA Rover App</h1>
+<div id="Content">
+    <div hidden id="loader" class="loader">Loading...</div>
 
-    <h2> Below are the options to interact with Rover images. </h2>
-    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 
-    <p>Download all missing NASA images by clicking <a href="~/home/downloadfiles">HERE</a>.</p>
 
-    <p>Browse and view images <a href="https://docs.microsoft.com/aspnet/core">HERE</a>.</p>
+    <div class="text-center">
+        <h1 class="display-4">Welcome to NASA Rover App</h1>
+
+        <h2> Below are the options to interact with Rover images. </h2>
+        @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+
+        <p>Download all missing NASA images by clicking <a onclick="NotifyUserForDownload();">HERE</a>.</p>
+
+        <p>Browse and view images <a href="~/home/viewfiles">HERE</a>.</p>
+    </div>
 </div>
+

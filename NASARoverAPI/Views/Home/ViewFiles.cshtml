@@ -1,24 +1,25 @@
 ﻿@{
     ViewData["Title"] = "Images";
 }
+<div id="Content">
+    <h1>@ViewData["Title"]</h1>
 
-<h1>@ViewData["Title"]</h1>
+    <h2>@ViewData["Message"]</h2>
 
-<h2>Images available for viewing.</h2>
-
-<table style="border: 1px solid black; width: 100%;">
-    <tr>
-        <th style="border: 1px solid black; padding: 15px;">Rover</th>
-        <th style="border: 1px solid black; padding: 15px;">Date</th>
-        <th style="border: 1px solid black; padding: 15px;">Image</th>
-    </tr>
-
-    @foreach (NASARoverAPI.Types.ImageData image in (List<NASARoverAPI.Types.ImageData>)ViewData["Images"])
-    {
+    <table style="border: 1px solid black; width: 100%;">
         <tr>
-            <td style="border: 1px solid black; padding: 15px;">@image.roverName</td>
-            <td style="border: 1px solid black; padding: 15px;">@image.date</td>
-            <td style="border: 1px solid black; padding: 15px;"><a target="popup" href="/home/getimage?location=@image.localPath" onclick="window.open('/home/getimage?location=@image.localPath','name','width=600,height=400')">@image.filename</a></td>
+            <th style="border: 1px solid black; padding: 15px;">Rover</th>
+            <th style="border: 1px solid black; padding: 15px;">Date</th>
+            <th style="border: 1px solid black; padding: 15px;">Image</th>
         </tr>
-    }
-</table>
+
+        @foreach (NASARoverAPI.Types.ImageData image in (List<NASARoverAPI.Types.ImageData>)ViewData["Images"])
+        {
+            <tr>
+                <td style="border: 1px solid black; padding: 15px;">@image.roverName</td>
+                <td style="border: 1px solid black; padding: 15px;">@image.date</td>
+                <td style="border: 1px solid black; padding: 15px;"><a target="popup" href="/home/getimage?location=@image.localPath" onclick="window.open('/home/getimage?location=@image.localPath','name','width=600,height=400')">@image.filename</a></td>
+            </tr>
+        }
+    </table>
+</div>
