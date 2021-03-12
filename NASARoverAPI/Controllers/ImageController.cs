@@ -44,14 +44,5 @@ namespace NASARoverAPI.Controllers
             var result = provider.GetMetadata();
             return result;
         }
-
-        [HttpGet("GetImage")]
-        public ApiProviderResult GetImage()
-        {
-            //NasaApiProvider provider = new NasaApiProvider(nasaConfiguration);
-            //var result = provider.GetImage();
-            //return result;
-            return null;
-        }
     }
 }

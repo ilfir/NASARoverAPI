@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NASARoverAPI.Helpers;
 using NASARoverAPI.Models;
 using NASARoverAPI.Types;
 using Newtonsoft.Json;
@@ -18,20 +19,6 @@ namespace NASARoverAPI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-
-        //private HttpClient HttpClient
-        //{
-        //    get
-        //    {
-        //        var client = new HttpClient();
-        //        //client.BaseAddress = new Uri($"https://{Request.Host.Value}/");
-        //        client.BaseAddress = new Uri($"http://localhost:80/");                
-        //        client.DefaultRequestHeaders.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //        return client;
-        //    }
-        //}
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -49,53 +36,40 @@ namespace NASARoverAPI.Controllers
             return View();
         }
 
+        // TODO: add action filter for handling exceptions.
         public async Task<IActionResult> DownloadFilesAsync()
         {
-            using (var client = new HttpClient())
-            {
-                //                var client = new HttpClient();
-                //client.BaseAddress = new Uri($"https://{Request.Host.Value}/");
-                client.BaseAddress = new Uri($"http://localhost:80/");
-                client.DefaultRequestHeaders.Clear();
+            var res = await RestHelper.ProcessGetRequestAsync("api/image/downloadfiles");
+            var data = res.data;
+            var apiResult = JsonConvert.DeserializeObject<ApiProviderResultShort>(data);                
 
-                HttpResponseMessage Res = await client.GetAsync("api/image/downloadfiles");
-                var data = await Res.Content.ReadAsStringAsync();
-                var apiResult = JsonConvert.DeserializeObject<ApiProviderResultShort>(data);                
+            ViewData["Success"] = apiResult.success;
+            ViewData["Message"] = apiResult.message;
 
-                ViewData["Success"] = apiResult.success;
-                ViewData["Message"] = apiResult.message;
-
-                return View();
-            }
+            return View();         
         }
 
 
+        // TODO: add action filter for handling exceptions.
         public async Task<IActionResult> ViewFilesAsync()
         {
-            using (var client = new HttpClient())
+            var res = await RestHelper.ProcessGetRequestAsync("/api/image/getmetadata");
+            var data = res.data;
+            var metadata = JsonConvert.DeserializeObject<ApiProviderResult>(data);
+            if (metadata == null || metadata.data == null)
             {
-//                var client = new HttpClient();
-                //client.BaseAddress = new Uri($"https://{Request.Host.Value}/");
-                client.BaseAddress = new Uri($"http://localhost:80/");
-                client.DefaultRequestHeaders.Clear();
-
-                HttpResponseMessage Res = await client.GetAsync("api/image/getmetadata");
-                var data = await Res.Content.ReadAsStringAsync();
-                var metadata = JsonConvert.DeserializeObject<ApiProviderResult>(data);
-                if (metadata == null || metadata.data == null)
-                {
-                    metadata = new ApiProviderResult() { data = new List<ImageData>() };
-                    ViewData["Message"] = "No images. Please use Download link above to get images before viewing.";
-                }
-                else
-                { 
-                    ViewData["Message"] = $"Images available for viewing: {metadata.data.Count}.";                
-                }
-                ViewData["Images"] = metadata.data;
-                return View();
+                metadata = new ApiProviderResult() { data = new List<ImageData>() };
+                ViewData["Message"] = "No images. Please use Download link above to get images before viewing.";
             }
+            else
+            { 
+                ViewData["Message"] = $"Images available for viewing: {metadata.data.Count}.";                
+            }
+            ViewData["Images"] = metadata.data;
+            return View();
         }
 
+        // TODO: add action filter for handling exceptions.
         public ActionResult GetImage(string location)
         {
             if (System.IO.File.Exists(location))
